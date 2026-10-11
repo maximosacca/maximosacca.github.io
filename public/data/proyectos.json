@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "nombre": "To-Do-List",
+    "descripcion": "Aplicación web de gestión de tareas construida con HTML, CSS y JavaScript vanilla. Incluye autenticación de usuarios con Firebase Auth y persistencia de datos con Firestore en tiempo real. Desarrollada por cuenta propia como proyecto de práctica para consolidar manipulación del DOM, lógica CRUD y consumo de servicios externos.",
+    "tecnologias": ["HTML", "CSS", "JavaScript", "Firebase"],
+    "github": "https://github.com/maximosacca/Maksy-todo-list-db",
+    "deploy": "https://maksy-todo-list-db.vercel.app/",
+    "img": "images/proyectos/todo.jpg",
+    "variante": "small"
+  },
+  {
+    "id": 2,
+    "nombre": "Hermanos Jota - E-commerce",
+    "descripcion": "Proyecto final en equipo para el curso Full-Stack Developer de Santander Open Academy e ITBA. Es un e-commerce de muebles artesanales con arquitectura cliente-servidor, desarrollado con React en el frontend y Node.js/Express en el backend. Incluye catálogo dinámico, carrito y consumo de API REST.",
+    "tecnologias": ["React", "Node.js", "Express", "Vite"],
+    "github": "https://github.com/Reiraku73/ITBA-MERN-Sprint-3y4",
+    "deploy": "",
+    "img": "images/proyectos/hermanos-jota.jpg",
+    "variante": "large"
+  },
+  {
+    "id": 3,
+    "nombre": "361 Agencia",
+    "descripcion": "Sitio web multipágina diseñado para una agencia de publicidad. El desarrollo tiene un fuerte enfoque en UI/UX, integrando animaciones fluidas con GSAP, efectos de revelado al scrollear y cursores interactivos para crear una experiencia de navegación dinámica.",
+    "tecnologias": ["HTML", "CSS", "JavaScript", "GSAP"],
+    "github": "",
+    "deploy": "https://361-agency.vercel.app/index.html",
+    "img": "images/proyectos/361.jpg",
+    "variante": "wide"
+  }
+]

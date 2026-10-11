@@ -1,0 +1,457 @@
+/* ==========================================================================
+   FUENTES
+   ========================================================================== */
+@import url("https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Poppins:wght@300;400;600&display=swap");
+
+/* ==========================================================================
+   VARIABLES · Paleta Bosque Digital + medidas de layout
+   ========================================================================== */
+:root {
+  /* Colores */
+  --bg-main: #050505; /* Negro casi puro / Fondo profundo */
+  --bg-surface: #141414; /* Gris muy oscuro / Tarjetas y contenedores */
+  --color-primary: #2f902d; /* Verde vibrante / Acciones, enlaces clave */
+  --color-accent: #09573a; /* Verde bosque oscuro / Glows, fondos secundarios */
+
+  /* Textos */
+  --text-main: #e5e5e5; /* Blanco suave */
+  --text-muted: #888888; /* Gris / Subtítulos */
+  --border-color: #333333; /* Gris medio para bordes sutiles */
+
+  /* Fuentes */
+  --font-heading: "Lora", serif;
+  --font-body: "Poppins", sans-serif;
+
+  /* Layout */
+  --container-width: 1200px; /* Ancho máximo compartido por todas las secciones */
+  --gutter: 1.5rem; /* Margen lateral mínimo en pantallas chicas */
+}
+
+/* ==========================================================================
+   BASE · reset mínimo, body y títulos
+   ========================================================================== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  font-family: var(--font-body);
+  font-weight: 300;
+  line-height: 1.6;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  color: var(--text-main);
+  margin-bottom: 1rem;
+}
+
+/* ==========================================================================
+   LAYOUT · contenedor compartido
+   Todas las secciones (header, hero, about...) usan este mismo ancho,
+   así sus bordes izquierdo y derecho coinciden.
+   ========================================================================== */
+.container {
+  width: min(100% - 2 * var(--gutter), var(--container-width));
+  margin-inline: auto;
+}
+
+/* ==========================================================================
+   HEADER · barra fija + logo
+   ========================================================================== */
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  background: none;
+  border-top: 1px solid rgba(47, 144, 45, 0.4);
+  transition:
+    background-color 0.4s ease,
+    border-color 0.4s ease;
+}
+
+.site-header .logo {
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  max-height: 100px;
+  opacity: 1;
+  visibility: visible;
+  transition:
+    max-height 0.4s ease,
+    opacity 0.3s ease,
+    padding 0.4s ease,
+    visibility 0.4s;
+}
+
+.logo a {
+  font-family: var(--font-heading);
+  font-style: italic;
+  color: var(--color-primary);
+  font-weight: 600;
+  font-size: 1.8rem;
+  text-decoration: none;
+}
+
+/* Estado al hacer scroll */
+.site-header.scrolled {
+  background-color: transparent;
+  border-top-color: transparent;
+  border-bottom-color: transparent;
+  box-shadow: none;
+}
+
+.site-header.scrolled .logo {
+  max-height: 0;
+  padding: 0;
+  opacity: 0;
+  visibility: hidden;
+}
+
+/* ==========================================================================
+   NAV · menú principal
+   ========================================================================== */
+.main-nav ul {
+  /* Grid: todos los links tienen el mismo ancho, sin usar porcentajes */
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  gap: 2rem;
+  margin-block: 20px;
+  margin-inline: auto;
+  max-width: 600px; /* Evita que los links se estiren de más */
+  padding: 0;
+  list-style: none;
+}
+
+.main-nav li {
+  height: 50px;
+  text-align: center;
+}
+
+.main-nav a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 0;
+  color: var(--text-muted);
+
+  font-family: var(--font-heading);
+  font-size: 0.9rem;
+  font-weight: 400;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-decoration: none;
+
+  transition: all 0.15s ease-in-out;
+}
+
+.main-nav a:hover,
+.main-nav a.active {
+  background-color: var(--color-primary);
+  color: var(--bg-main);
+  font-weight: 600;
+  box-shadow: inset 0 0 15px rgba(255, 255, 255, 0.2);
+}
+
+/* ==========================================================================
+   HERO
+   El fondo ocupa todo el ancho; el contenido de texto va dentro de .container
+   ========================================================================== */
+.hero {
+  min-height: 100vh;
+  width: 100%; /* antes 100vw: generaba scroll horizontal */
+  background-image:
+    linear-gradient(to bottom, rgba(5, 5, 5, 0.2) 0%, rgba(5, 5, 5, 1) 100%),
+    url("/images/background.jpg");
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 2rem;
+}
+
+.hero h1 {
+  font-size: 3.5rem;
+  letter-spacing: -1px;
+}
+
+.btn-hero {
+  background-color: var(--color-accent);
+  color: var(--text-main);
+  font-family: var(--font-body);
+  padding: 0.8rem 2rem;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  border: 1px solid rgba(47, 144, 45, 0.3);
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.btn-hero:hover {
+  background-color: var(--color-primary);
+  color: var(--bg-main);
+  box-shadow: 0 0 20px rgba(47, 144, 45, 0.5);
+}
+
+/* ==========================================================================
+   ABOUT · layout de la sección (grid de 2 columnas dentro de .container)
+   ========================================================================== */
+.about-section {
+  padding-block: 6rem;
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+/* --- Texto --- */
+.about-content {
+  max-width: 460px;
+}
+
+.about-kicker {
+  display: block;
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  font-weight: 400;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  margin-bottom: 0.5rem;
+}
+
+.about-content h2 {
+  margin-top: 0;
+  font-size: 2.5rem;
+}
+
+/* --- Media (contiene el componente ImageHover) --- */
+.about-media {
+  width: 100%; /* llena su columna */
+}
+
+/* ==========================================================================
+   IMAGE HOVER · efecto de capas con parallax (ImageHover.jsx)
+   ========================================================================== */
+.image-container {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  margin-inline: auto;
+  aspect-ratio: 1 / 1; /* Cambialo si querés otra proporción */
+  cursor: pointer;
+  overflow: hidden;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+}
+
+.image-layer {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  backface-visibility: hidden;
+  will-change: transform, opacity;
+}
+
+/* ==========================================================================
+   BOTONES
+   ========================================================================== */
+
+/* --- Base --- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-decoration: none;
+  padding: 0.8rem 2rem;
+  border-radius: 8px;
+  border: 1px solid transparent; /* Reserva el espacio para el borde */
+  cursor: pointer;
+  transition: all 0.25s ease-in-out;
+}
+
+/* --- Primario (verde vibrante, sólido) --- */
+.btn-primary {
+  background-color: var(--color-primary);
+  color: var(--bg-main); /* Texto oscuro para alto contraste */
+}
+
+.btn-primary:hover {
+  background-color: transparent;
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+  box-shadow: 0 0 20px rgba(47, 144, 45, 0.4);
+}
+
+/* --- Secundario (verde bosque oscuro, borde sutil) --- */
+.btn-secondary {
+  background-color: var(--bg-surface);
+  color: var(--text-main);
+  border-color: var(--border-color);
+}
+
+.btn-secondary:hover {
+  background-color: var(--color-accent);
+  border-color: var(--color-primary);
+  color: var(--text-main);
+  box-shadow: 0 0 15px rgba(9, 87, 58, 0.3);
+}
+
+/* --- Contacto (minimalista, subrayado animado) --- */
+.btn-contact {
+  background: none;
+  border: none;
+  color: var(--text-main);
+  padding: 0.5rem 0; /* Menos padding vertical para que el subrayado quede cerca */
+  border-radius: 0;
+  position: relative;
+}
+
+.btn-contact::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--color-primary);
+  transform: scaleX(0.4); /* La línea empieza más corta */
+  transform-origin: bottom left;
+  transition: transform 0.25s ease-in-out;
+}
+
+.btn-contact:hover {
+  color: var(--color-primary);
+}
+
+.btn-contact:hover::after {
+  transform: scaleX(1); /* Se expande al 100% */
+}
+
+/* ==========================================================================
+   FOOTER
+   ========================================================================== */
+
+.footer {
+  border-top: 1px solid var(--color-accent);
+}
+.contact-footer {
+  display: grid;
+  place-content: center;
+}
+.big {
+  font-size: 6.5rem;
+  letter-spacing: -1px;
+  text-align: center;
+  text-decoration: none;
+}
+
+.footer-list {
+  display: flex;
+  gap: 2rem;
+  padding-top: 3rem;
+}
+
+.footer-list li a {
+  text-decoration: none;
+  color: var(--color-accent);
+}
+
+/* ==========================================================================
+   PROYECTOS
+   ========================================================================== */
+
+/* El contenedor principal */
+.portfolio-grid {
+  display: grid;
+  /* Crea 12 columnas del mismo tamaño */
+  grid-template-columns: repeat(12, 1fr);
+  gap: 2rem;
+  align-items: start; /* Para que las tarjetas no se estiren verticalmente si son de distinto alto */
+}
+
+/* Estilos base de la tarjeta */
+.card {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.card img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+/* --- CLASES DE VARIANTES (Replicando tu imagen) --- */
+
+/* Equivale a "Shadow Archive"[cite: 7]: Ocupa 4 columnas (más angosta) */
+.card-small {
+  grid-column: span 4;
+}
+
+/* Equivale a "MATCH POINT"[cite: 7]: Ocupa 7 columnas y la empujamos 1 columna a la derecha para separarla */
+.card-large {
+  grid-column: span 7;
+  margin-left: auto; /* Truco para empujarla a la derecha si sobra espacio en la grilla */
+}
+
+/* Equivale a "SO!"[cite: 7]: Ocupa 8 columnas pero empieza en la columna 3 para quedar centrada */
+.card-wide {
+  grid-column: 3 / 11;
+}
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+@media (max-width: 800px) {
+  .about-grid {
+    grid-template-columns: 1fr; /* El About se apila */
+    gap: 2.5rem;
+  }
+
+  .about-content {
+    max-width: 100%;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+
+  .main-nav ul {
+    gap: 0.5rem;
+  }
+
+  .main-nav a {
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+  }
+}

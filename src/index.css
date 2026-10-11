@@ -1,0 +1,88 @@
+/* ==========================================================================
+   1. RESET & CONFIGURACIÓN GLOBAL
+   ========================================================================== */
+*, *::before, *::after {
+  box-sizing: border-box; /* Hace que el padding y border no alteren el ancho total */
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth; /* Scroll suave al usar anclas (#) */
+  font-size: 16px;          /* Base para el uso de rem */
+}
+
+body {
+  min-height: 100vh;
+  line-height: 1.6;        /* Espaciado de lectura cómodo */
+  background-color: #f8f9fa; /* Fondo gris muy claro y sutil */
+  color: #212529;          /* Texto principal oscuro (evita el negro puro) */
+  
+  /* Tipografía limpia y moderna del sistema (cambia a la tuya si usas Google Fonts) */
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  
+  /* Suavizado de fuentes para pantallas modernas */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ==========================================================================
+   2. ELEMENTOS MULTIMEDIA (Imágenes fluidas)
+   ========================================================================== */
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%; /* Evita que las imágenes se salgan de su contenedor */
+  height: auto;    /* Mantiene la proporción original */
+}
+
+/* ==========================================================================
+   3. TIPOGRAFÍA REUTILIZABLE
+   ========================================================================== */
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1.2;
+  font-weight: 700;
+  color: #B14AED; /* Encabezados un poco más oscuros que el body */
+  margin-bottom: 1rem;
+}
+
+h1 { font-size: 2.5rem; }
+h2 { font-size: 2rem; }
+h3 { font-size: 1.75rem; }
+p { margin-bottom: 1.25rem; }
+
+/* ==========================================================================
+   4. ELEMENTOS INTERACTIVOS (Enlaces, Listas, Botones)
+   ========================================================================== */
+a {
+  text-decoration: none; /* Quita el subrayado feo por defecto */
+  color: #007bff;        /* Azul estándar para enlaces */
+  transition: color 0.2s ease-in-out;
+}
+
+a:hover {
+  color: #0056b3;        /* Azul más oscuro al pasar el cursor */
+}
+
+ul, ol {
+  list-style: none;      /* Quita los puntos/números por defecto si usas listas para layouts o menús */
+}
+
+button, input, select, textarea {
+  font: inherit;         /* Heredan la tipografía del body automáticamente */
+}
+
+button {
+  cursor: pointer;       /* Cambia el cursor a mano interactiva */
+  border: none;
+  background: none;
+}
+
+/* ==========================================================================
+   5. CONTENEDOR AUXILIAR (Estructura de la página)
+   ========================================================================== */
+.container {
+  width: 90%;
+  max-width: 1200px;     /* Ancho máximo recomendado para páginas web */
+  margin-right: auto;
+  margin-left: auto;     /* Centra el bloque en la pantalla */
+}
