@@ -8,23 +8,32 @@
    ========================================================================== */
 :root {
   /* Colores */
-  --bg-main: #050505; /* Negro casi puro / Fondo profundo */
-  --bg-surface: #141414; /* Gris muy oscuro / Tarjetas y contenedores */
-  --color-primary: #2f902d; /* Verde vibrante / Acciones, enlaces clave */
-  --color-accent: #09573a; /* Verde bosque oscuro / Glows, fondos secundarios */
+  --bg-main: #050505;
+  /* Negro casi puro / Fondo profundo */
+  --bg-surface: #141414;
+  /* Gris muy oscuro / Tarjetas y contenedores */
+  --color-primary: #2f902d;
+  /* Verde vibrante / Acciones, enlaces clave */
+  --color-accent: #09573a;
+  /* Verde bosque oscuro / Glows, fondos secundarios */
 
   /* Textos */
-  --text-main: #e5e5e5; /* Blanco suave */
-  --text-muted: #888888; /* Gris / Subtítulos */
-  --border-color: #333333; /* Gris medio para bordes sutiles */
+  --text-main: #e5e5e5;
+  /* Blanco suave */
+  --text-muted: #888888;
+  /* Gris / Subtítulos */
+  --border-color: #333333;
+  /* Gris medio para bordes sutiles */
 
   /* Fuentes */
   --font-heading: "Lora", serif;
   --font-body: "Poppins", sans-serif;
 
   /* Layout */
-  --container-width: 1200px; /* Ancho máximo compartido por todas las secciones */
-  --gutter: 1.5rem; /* Margen lateral mínimo en pantallas chicas */
+  --container-width: 1200px;
+  /* Ancho máximo compartido por todas las secciones */
+  --gutter: 1.5rem;
+  /* Margen lateral mínimo en pantallas chicas */
 }
 
 /* ==========================================================================
@@ -65,6 +74,11 @@ h6 {
    ========================================================================== */
 .container {
   width: min(100% - 2 * var(--gutter), var(--container-width));
+  margin-inline: auto;
+}
+
+.container-wide {
+  width: min(100% - 2 * var(--gutter), 1600px);
   margin-inline: auto;
 }
 
@@ -133,7 +147,8 @@ h6 {
   gap: 2rem;
   margin-block: 20px;
   margin-inline: auto;
-  max-width: 600px; /* Evita que los links se estiren de más */
+  max-width: 600px;
+  /* Evita que los links se estiren de más */
   padding: 0;
   list-style: none;
 }
@@ -175,7 +190,8 @@ h6 {
    ========================================================================== */
 .hero {
   min-height: 100vh;
-  width: 100%; /* antes 100vw: generaba scroll horizontal */
+  width: 100%;
+  /* antes 100vw: generaba scroll horizontal */
   background-image:
     linear-gradient(to bottom, rgba(5, 5, 5, 0.2) 0%, rgba(5, 5, 5, 1) 100%),
     url("/images/background.jpg");
@@ -250,7 +266,75 @@ h6 {
 
 /* --- Media (contiene el componente ImageHover) --- */
 .about-media {
-  width: 100%; /* llena su columna */
+  width: 100%;
+  /* llena su columna */
+}
+
+/* ==========================================================================
+   CONTACTO
+   ========================================================================== */
+
+/* ==========================================================================
+   FORMULARIO DE CONTACTO
+   ========================================================================== */
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+  /* Centra el formulario */
+  background-color: var(--bg-surface);
+  padding: 2.5rem;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-label {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.form-input {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  background-color: var(--bg-main);
+  /* Usa el fondo más oscuro para hacer contraste */
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  color: var(--text-main);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+/* Efecto glow verde al hacer clic en un input */
+.form-input:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 10px rgba(47, 144, 45, 0.15);
+}
+
+.form-textarea {
+  resize: vertical;
+  /* Permite agrandar solo hacia abajo */
+  min-height: 120px;
+}
+
+.form-submit {
+  margin-top: 1rem;
+  width: 100%;
+  /* El botón ocupa todo el ancho del formulario */
 }
 
 /* ==========================================================================
@@ -261,7 +345,8 @@ h6 {
   width: 100%;
   max-width: 600px;
   margin-inline: auto;
-  aspect-ratio: 1 / 1; /* Cambialo si querés otra proporción */
+  aspect-ratio: 1 / 1;
+  /* Cambialo si querés otra proporción */
   cursor: pointer;
   overflow: hidden;
   border-radius: 12px;
@@ -293,7 +378,8 @@ h6 {
   text-decoration: none;
   padding: 0.8rem 2rem;
   border-radius: 8px;
-  border: 1px solid transparent; /* Reserva el espacio para el borde */
+  border: 1px solid transparent;
+  /* Reserva el espacio para el borde */
   cursor: pointer;
   transition: all 0.25s ease-in-out;
 }
@@ -301,7 +387,8 @@ h6 {
 /* --- Primario (verde vibrante, sólido) --- */
 .btn-primary {
   background-color: var(--color-primary);
-  color: var(--bg-main); /* Texto oscuro para alto contraste */
+  color: var(--bg-main);
+  /* Texto oscuro para alto contraste */
 }
 
 .btn-primary:hover {
@@ -330,7 +417,8 @@ h6 {
   background: none;
   border: none;
   color: var(--text-main);
-  padding: 0.5rem 0; /* Menos padding vertical para que el subrayado quede cerca */
+  padding: 0.5rem 0;
+  /* Menos padding vertical para que el subrayado quede cerca */
   border-radius: 0;
   position: relative;
 }
@@ -343,7 +431,8 @@ h6 {
   width: 100%;
   height: 2px;
   background-color: var(--color-primary);
-  transform: scaleX(0.4); /* La línea empieza más corta */
+  transform: scaleX(0.4);
+  /* La línea empieza más corta */
   transform-origin: bottom left;
   transition: transform 0.25s ease-in-out;
 }
@@ -353,7 +442,8 @@ h6 {
 }
 
 .btn-contact:hover::after {
-  transform: scaleX(1); /* Se expande al 100% */
+  transform: scaleX(1);
+  /* Se expande al 100% */
 }
 
 /* ==========================================================================
@@ -363,10 +453,12 @@ h6 {
 .footer {
   border-top: 1px solid var(--color-accent);
 }
+
 .contact-footer {
   display: grid;
   place-content: center;
 }
+
 .big {
   font-size: 6.5rem;
   letter-spacing: -1px;
@@ -395,7 +487,8 @@ h6 {
   /* Crea 12 columnas del mismo tamaño */
   grid-template-columns: repeat(12, 1fr);
   gap: 2rem;
-  align-items: start; /* Para que las tarjetas no se estiren verticalmente si son de distinto alto */
+  align-items: start;
+  /* Para que las tarjetas no se estiren verticalmente si son de distinto alto */
 }
 
 /* Estilos base de la tarjeta */
@@ -421,7 +514,8 @@ h6 {
 /* Equivale a "MATCH POINT"[cite: 7]: Ocupa 7 columnas y la empujamos 1 columna a la derecha para separarla */
 .card-large {
   grid-column: span 7;
-  margin-left: auto; /* Truco para empujarla a la derecha si sobra espacio en la grilla */
+  margin-left: auto;
+  /* Truco para empujarla a la derecha si sobra espacio en la grilla */
 }
 
 /* Equivale a "SO!"[cite: 7]: Ocupa 8 columnas pero empieza en la columna 3 para quedar centrada */
@@ -429,12 +523,188 @@ h6 {
   grid-column: 3 / 11;
 }
 
+
+.page-wrapper {
+  /* Ajustá este valor según qué tan alto sea tu menú. 120px suele funcionar bien */
+  padding-top: 150px; 
+  min-height: 100vh;
+}
+
+
+/* ==========================================================================
+   WIDGET FLOTANTE · DATO RANDOM 
+   ========================================================================== */
+.fact-widget-container {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+/* --- Botón Flotante (Trigger) --- */
+.fact-trigger-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  background-color: var(--bg-surface);
+  color: var(--text-main);
+  border: 1px solid var(--border-color);
+  padding: 0.8rem 1.2rem;
+  border-radius: 50px;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.fact-trigger-btn:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  box-shadow: 0 0 15px rgba(47, 144, 45, 0.3);
+  transform: translateY(-2px);
+}
+
+.fact-icon {
+  font-size: 1.1rem;
+}
+
+/* --- Bocadillo / Diálogo estilo Cómic --- */
+.fact-dialog {
+  position: relative;
+  margin-bottom: 1.2rem;
+  width: min(320px, 85vw);
+  background-color: var(--bg-surface);
+  border: 1px solid var(--color-primary);
+  border-radius: 12px;
+  padding: 1.2rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7), 0 0 20px rgba(47, 144, 45, 0.15);
+  animation: popupAnim 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Triángulo apuntando hacia abajo (Pico de diálogo) */
+.fact-dialog::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  right: 1.8rem;
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 10px solid var(--color-primary);
+}
+
+.fact-dialog-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.8rem;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 0.5rem;
+}
+
+.fact-dialog-title {
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+.fact-close-btn {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 1.2rem;
+  cursor: pointer;
+  line-height: 1;
+  transition: color 0.2s ease;
+}
+
+.fact-close-btn:hover {
+  color: var(--text-main);
+}
+
+.fact-dialog-body {
+  font-size: 0.9rem;
+  color: var(--text-main);
+  line-height: 1.5;
+  margin-bottom: 1rem;
+  min-height: 50px;
+}
+
+.fact-loading {
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+.fact-dialog-footer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.btn-fact-action {
+  background-color: var(--color-accent);
+  color: var(--text-main);
+  border: 1px solid var(--color-primary);
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-fact-action:hover:not(:disabled) {
+  background-color: var(--color-primary);
+  color: var(--bg-main);
+}
+
+.btn-fact-action:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Animación de entrada */
+@keyframes popupAnim {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Adaptación responsive para celulares */
+@media (max-width: 600px) {
+  .fact-widget-container {
+    bottom: 1.2rem;
+    right: 1.2rem;
+  }
+
+  .fact-text {
+    display: none; /* Muestra solo el ícono en móviles */
+  }
+
+  .fact-trigger-btn {
+    padding: 0.8rem;
+    border-radius: 50%;
+  }
+}
 /* ==========================================================================
    RESPONSIVE
    ========================================================================== */
 @media (max-width: 800px) {
   .about-grid {
-    grid-template-columns: 1fr; /* El About se apila */
+    grid-template-columns: 1fr;
+    /* El About se apila */
     gap: 2.5rem;
   }
 

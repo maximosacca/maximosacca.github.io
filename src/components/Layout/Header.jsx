@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import { NavLink, Link } from "react-router";
+
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -20,18 +22,18 @@ export default function Header() {
     <header className={`site-header ${isScrolled ? "scrolled" : ""}`}>
       <div className="container">
         <div className="logo">
-          <a href="/">MAXIMO SACCA</a>
+          <NavLink to="/">MAXIMO SACCA</NavLink>
         </div>
         <nav className="main-nav">
           <ul>
             <li>
-              <a href="/contacto">HABLEMOS</a>
+              <NavLink to="/contacto">HABLEMOS</NavLink>
             </li>
             <li>
-              <a href="#projects">PROYECTOS</a>
+              <NavLink to="/proyectos">PROYECTOS</NavLink>
             </li>
             <li>
-              <a href="#about">SOBRE MÍ</a>
+              <Link to="/#about">SOBRE MÍ</Link>
             </li>
           </ul>
         </nav>

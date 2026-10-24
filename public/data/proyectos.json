@@ -6,8 +6,8 @@
     "tecnologias": ["HTML", "CSS", "JavaScript", "Firebase"],
     "github": "https://github.com/maximosacca/Maksy-todo-list-db",
     "deploy": "https://maksy-todo-list-db.vercel.app/",
-    "img": "images/proyectos/todo.jpg",
-    "variante": "small"
+    "img": "images/proyectos/todo.png",
+    "variante": "wide"
   },
   {
     "id": 2,
@@ -16,7 +16,7 @@
     "tecnologias": ["React", "Node.js", "Express", "Vite"],
     "github": "https://github.com/Reiraku73/ITBA-MERN-Sprint-3y4",
     "deploy": "",
-    "img": "images/proyectos/hermanos-jota.jpg",
+    "img": "images/proyectos/hermanos-jota.png",
     "variante": "large"
   },
   {
@@ -26,7 +26,7 @@
     "tecnologias": ["HTML", "CSS", "JavaScript", "GSAP"],
     "github": "",
     "deploy": "https://361-agency.vercel.app/index.html",
-    "img": "images/proyectos/361.jpg",
+    "img": "images/proyectos/361.png",
     "variante": "wide"
   }
 ]
