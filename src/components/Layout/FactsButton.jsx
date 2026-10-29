@@ -1,83 +1,72 @@
 import { useEffect, useState } from "react"
-import { getFacts } from "../../service/facts"
+import { getNasa } from "../../service/nasa"
 
-export default function FactsButton() {
-    const [fact, setFact] = useState(null)
+export default function NasaButton() {
+    const [isOpen, setIsOpen] = useState(false)
+    const [data, setData] = useState(null)
     const [cargando, setCargando] = useState(false)
-    const [isClicked, setIsClicked] = useState(false)
     const [error, setError] = useState(null)
-    const [isOpen, setIsOpen] = useState(false);
 
     useEffect(() => {
-        if (!isOpen) return;
-        const cargarFactos = async () => {
+        if (!isOpen || data) return
+
+        const cargar = async () => {
             setCargando(true)
+            setError(null)
             try {
-                const data = await getFacts();
-                setFact(data);
+                setData(await getNasa())
             } catch (err) {
                 setError("Hubo un problema cargando los datos")
-                console.error("Hubo un problema cargando los datos:", err);
+                console.error("Hubo un problema cargando los datos:", err)
             } finally {
-                setCargando(false);
+                setCargando(false)
             }
-        };
+        }
 
-        cargarFactos();
-    }, [isClicked, isOpen]);
-
-    const handleToggleModal = () => {
-        setIsOpen((prev) => !prev);
-    };
-
-    const handleNuevoDato = () => {
-        setIsClicked((prev) => !prev);
-    };
+        cargar()
+    }, [isOpen])
 
     return (
-        <div className="fact-widget-container">
+        <div className="nasa-widget-container">
             {isOpen && (
-                <div className="fact-dialog">
-                    <div className="fact-dialog-header">
+                <div className="nasa-dialog">
+                    <div className="nasa-dialog-header">
                         {!cargando && (
-                            <span className="fact-dialog-title"> Ahora que aprendiste algo, hablemos!</span>
+                            <span className="nasa-dialog-title"> Ahora que aprendiste algo, hablemos!</span>
                         )}
-
-                        <button className="fact-close-btn" onClick={() => setIsOpen(false)}>
+                        <button className="nasa-close-btn" onClick={() => setIsOpen(false)}>
                             ×
                         </button>
                     </div>
 
-                    <div className="fact-dialog-body">
+                    <div className="nasa-dialog-body">
                         {cargando ? (
-                            <p className="fact-loading">Buscando dato random...</p>
+                            <p className="nasa-loading">🌎...</p>
                         ) : error ? (
-                            <p className="fact-error">{error}</p>
-                        ) : (
-                            <p>{fact?.text || fact}</p>
-                        )}
-                    </div>
-
-                    <div className="fact-dialog-footer">
-                        <button
-                            className="btn-fact-action"
-                            onClick={handleNuevoDato}
-                            disabled={cargando}
-                        >
-                            {cargando ? "Cargando..." : "Otro dato "}
-                        </button>
+                            <p className="nasa-error">{error}</p>
+                        ) : data ? (
+                            <div className="nasa-result">
+                                <h3 className="nasa-title">{data.title}</h3>
+                                <img className="nasa-media" src={data.image} alt={data.alt || data.title} />
+                                {data.media_type === "video" && (
+                                    <a className="nasa-video-link" href={data.permalink} target="_blank" rel="noreferrer">
+                                        Ver el video en NASA Science
+                                    </a>
+                                )}
+                                <p className="nasa-description">{data.explanation}</p>
+                            </div>
+                        ) : null}
                     </div>
                 </div>
             )}
 
-
             <button
-                className="fact-trigger-btn"
-                onClick={handleToggleModal}
-                aria-label="Pedir dato inútil"
+                className="nasa-trigger-btn"
+                onClick={() => setIsOpen((prev) => !prev)}
+                aria-label="Ver la imagen astronómica del día"
             >
-                <span className="fact-text">Dato Random</span>
-                <span className="fact-icon">🤓☝</span>
+                <span className="nasa-text">Imagen del día</span>
+                <span className="nasa-icon">🔭</span>
             </button>
         </div>
     )

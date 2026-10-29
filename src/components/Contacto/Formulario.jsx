@@ -14,7 +14,6 @@ export default function Formulario() {
       .then(
         () => {
           console.log('SUCCESS!');
-          // Opcional: limpiar el formulario después de enviar
           e.target.reset();
         },
         (error) => {

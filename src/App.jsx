@@ -5,13 +5,13 @@ import Home from './pages/Home.jsx'
 import Contacto from './pages/Contacto.jsx'
 import Proyectos from './pages/Proyectos.jsx'
 import ScrollToAnchor from './components/Utils/ScrollToAnchor.jsx'
-import { BrowserRouter, Routes, Route } from 'react-router';
+import { Routes, Route } from 'react-router';
 import FactsButton from './components/Layout/FactsButton.jsx'
 
 
 function App() {
   return (
-    <BrowserRouter>
+    <>
       <ScrollToAnchor/>
       <FactsButton/>
       <Header />
@@ -21,7 +21,7 @@ function App() {
         <Route path='/proyectos' element={<Proyectos/>}/>
       </Routes>
       <Footer/>
-    </BrowserRouter>
+    </>
   )
 }
 

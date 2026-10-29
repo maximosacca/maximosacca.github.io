@@ -532,9 +532,9 @@ h6 {
 
 
 /* ==========================================================================
-   WIDGET FLOTANTE · DATO RANDOM 
+   WIDGET FLOTANTE · NASA (IMAGEN DEL DÍA)
    ========================================================================== */
-.fact-widget-container {
+.nasa-widget-container {
   position: fixed;
   bottom: 2rem;
   right: 2rem;
@@ -545,7 +545,7 @@ h6 {
 }
 
 /* --- Botón Flotante (Trigger) --- */
-.fact-trigger-btn {
+.nasa-trigger-btn {
   display: flex;
   align-items: center;
   gap: 0.6rem;
@@ -562,22 +562,25 @@ h6 {
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.fact-trigger-btn:hover {
+.nasa-trigger-btn:hover {
   border-color: var(--color-primary);
   color: var(--color-primary);
   box-shadow: 0 0 15px rgba(47, 144, 45, 0.3);
   transform: translateY(-2px);
 }
 
-.fact-icon {
+.nasa-icon {
   font-size: 1.1rem;
 }
 
-/* --- Bocadillo / Diálogo estilo Cómic --- */
-.fact-dialog {
+/* --- Diálogo estilo Cómic --- */
+.nasa-dialog {
   position: relative;
+  display: flex;
+  flex-direction: column;
   margin-bottom: 1.2rem;
-  width: min(320px, 85vw);
+  width: min(380px, 90vw);
+  max-height: min(75vh, 560px);
   background-color: var(--bg-surface);
   border: 1px solid var(--color-primary);
   border-radius: 12px;
@@ -587,7 +590,7 @@ h6 {
 }
 
 /* Triángulo apuntando hacia abajo (Pico de diálogo) */
-.fact-dialog::after {
+.nasa-dialog::after {
   content: "";
   position: absolute;
   bottom: -10px;
@@ -599,7 +602,8 @@ h6 {
   border-top: 10px solid var(--color-primary);
 }
 
-.fact-dialog-header {
+.nasa-dialog-header {
+  flex-shrink: 0; /* el header queda fijo mientras el cuerpo scrollea */
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -608,14 +612,14 @@ h6 {
   padding-bottom: 0.5rem;
 }
 
-.fact-dialog-title {
+.nasa-dialog-title {
   font-family: var(--font-heading);
   font-size: 0.85rem;
   color: var(--color-primary);
   font-weight: 600;
 }
 
-.fact-close-btn {
+.nasa-close-btn {
   background: none;
   border: none;
   color: var(--text-muted);
@@ -625,49 +629,137 @@ h6 {
   transition: color 0.2s ease;
 }
 
-.fact-close-btn:hover {
+.nasa-close-btn:hover {
   color: var(--text-main);
 }
 
-.fact-dialog-body {
+/* --- Cuerpo con scroll --- */
+.nasa-dialog-body {
+  flex: 1;
+  min-height: 50px; /* sin esto flex no deja scrollear */
+  overflow-y: auto;
+  padding-right: 0.5rem;
   font-size: 0.9rem;
   color: var(--text-main);
   line-height: 1.5;
-  margin-bottom: 1rem;
-  min-height: 50px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-primary) transparent;
 }
 
-.fact-loading {
+.nasa-dialog-body::-webkit-scrollbar {
+  width: 6px;
+}
+
+.nasa-dialog-body::-webkit-scrollbar-thumb {
+  background-color: var(--color-primary);
+  border-radius: 3px;
+}
+
+.nasa-loading {
   color: var(--text-muted);
   font-style: italic;
 }
 
-.fact-dialog-footer {
-  display: flex;
-  justify-content: flex-end;
+.nasa-error {
+  color: #e5534b;
 }
 
-.btn-fact-action {
-  background-color: var(--color-accent);
+/* --- Resultado de la NASA --- */
+.nasa-title {
+  font-family: var(--font-heading);
+  font-size: 1rem;
   color: var(--text-main);
+  margin: 0 0 0.8rem;
+}
+
+.nasa-media {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 0.8rem;
+}
+
+.nasa-video-link {
+  display: inline-block;
+  margin-bottom: 0.8rem;
+  font-size: 0.8rem;
+  color: var(--color-primary);
+  text-decoration: underline;
+}
+
+.nasa-description {
+  margin: 0;
+  color: var(--text-muted);
+}
+
+/* ==========================================================================
+   MAPA · UBICACIÓN
+   ========================================================================== */
+.map-container {
+  width: 100%;
+  height: clamp(320px, 60vh, 560px);
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(47, 144, 45, 0.1);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.map-container:hover {
+  border-color: var(--color-primary);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 20px rgba(47, 144, 45, 0.25);
+}
+
+.map-canvas {
+  width: 100%;
+  height: 100%;
+}
+
+/* --- InfoWindow  */
+.gm-style .gm-style-iw-c {
+  background-color: var(--bg-surface) !important;
   border: 1px solid var(--color-primary);
-  padding: 0.4rem 0.8rem;
-  border-radius: 6px;
+  border-radius: 10px !important;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6) !important;
+  padding: 0.8rem 1rem !important;
+}
+
+.gm-style .gm-style-iw-d {
+  overflow: hidden !important;
+}
+
+
+.gm-style .gm-style-iw-tc::after {
+  background: var(--bg-surface) !important;
+}
+
+
+.gm-style .gm-ui-hover-effect {
+  top: 2px !important;
+  right: 2px !important;
+}
+
+.gm-style .gm-ui-hover-effect > span {
+  background-color: var(--text-muted) !important;
+}
+
+.gm-style .gm-ui-hover-effect:hover > span {
+  background-color: var(--text-main) !important;
+}
+
+
+.map-info {
+  padding-right: 1rem; 
+}
+
+.map-info-text {
+  margin: 0;
   font-family: var(--font-body);
-  font-size: 0.75rem;
+  font-size: 0.9rem;
   font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.btn-fact-action:hover:not(:disabled) {
-  background-color: var(--color-primary);
-  color: var(--bg-main);
-}
-
-.btn-fact-action:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
+  color: var(--color-primary);
 }
 
 /* Animación de entrada */
