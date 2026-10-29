@@ -11,9 +11,9 @@ export default function Footer() {
         </div>
 
         <ul className="footer-list">
-          <li><a href="">INSTAGRAM</a></li>
-          <li><a href="">WHATSAPP</a></li>
-          <li><a href="">LINKEDIN</a></li>
+          <li><a href="https://instagram.com/maximosacca" target="_blank">INSTAGRAM</a></li>
+          <li><a href="https://wa.me/543876471010" target="_blank">WHATSAPP</a></li>
+          <li><a href="https://www.linkedin.com/in/maximo-julian-sacca-jurado-955235272/" target="_blank">LINKEDIN</a></li>
         </ul>
       </div>
     </footer>

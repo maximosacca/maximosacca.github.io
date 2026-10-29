@@ -1,6 +1,6 @@
 
 export default function ProyectosCard({ nombre, img, variante, github, deploy }) {
-  const linkDestino = github ? github : deploy;
+  const linkDestino = deploy ? deploy : github;
   return (
     <article className={`card card-${variante}`}>
       <a href={linkDestino} target="_blank" rel="noreferrer">

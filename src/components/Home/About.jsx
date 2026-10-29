@@ -1,4 +1,4 @@
-import ImageHover from "./ImageHover";
+import { NavLink } from "react-router";
 
 export default function About() {
   return (
@@ -8,18 +8,17 @@ export default function About() {
           <p className="about-kicker">ABOUT</p>
           <h2>¿Quién está detrás?</h2>
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus
-            est unde quo, libero, blanditiis officia consectetur vero a odit
-            laborum optio? Iure, consectetur quia culpa distinctio labore
-            voluptate voluptatibus vel.
+            ¡Hola! Soy Máximo Sacca, tengo 21 años y soy de Salta, Argentina. Actualmente vivo en Córdoba.
+            En este momento me encuentro en proceso de formacion, tanto como Tecnico en Creacion Multimedial como Tecnico en Programacion.
+            Me interesa crear sitios web que combinen tecnología, diseño e interactividad, explorando formas creativas de transformar ideas en experiencias digitales.
           </p>
-          <button className="btn btn-contact">
-            Contactame
-          </button>
+          <NavLink to="/contacto#contact" className="btn btn-contact">
+            Hablemos
+          </NavLink>
         </div>
 
-        <div className="about-media">
-          <ImageHover src="/images/yo.jpg" alt="Foto de Máximo" />
+        <div className="image-container">
+          <img src="/images/perfil.png" alt="Foto de Máximo" />
         </div>
       </div>
     </section>

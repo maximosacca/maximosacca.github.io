@@ -1,28 +1,29 @@
 import { useEffect } from "react";
-import { useLocation, useNavigate } from "react-router"; // Importamos useNavigate
+import { useLocation, useNavigate } from "react-router";
 
 export default function ScrollToAnchor() {
   const { hash, pathname } = useLocation();
-  const navigate = useNavigate(); // Instanciamos la navegación
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (hash) {
-      // Quitamos el '#' para obtener el ID de la sección (ej: 'about')
       const targetId = hash.replace("#", "");
-      const element = document.getElementById(targetId);
       
-      if (element) {
-        // Un pequeño timeout para asegurar que el DOM terminó de renderizar
-        setTimeout(() => {
+      // Damos un pequeño margen de tiempo para asegurarnos de que la nueva vista cargó
+      const timer = setTimeout(() => {
+        const element = document.getElementById(targetId);
+        
+        if (element) {
           element.scrollIntoView({ behavior: "smooth", block: "start" });
           
-          // Cambiamos la ruta a '/' limpiando el hash de la URL
-          // 'replace: true' hace que esto ocurra sin añadir un paso extra al botón 'Atrás' del navegador
-          navigate("/", { replace: true });
-        }, 150);
-      }
+          // Mantiene el pathname actual (ej: "/contacto") y solo quita el hash
+          navigate(pathname, { replace: true });
+        }
+      }, 150);
+
+      return () => clearTimeout(timer);
     }
-  }, [hash, pathname, navigate]); // Añadimos navigate a las dependencias
-  
+  }, [hash, pathname, navigate]);
+
   return null;
 }

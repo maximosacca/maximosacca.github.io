@@ -82,6 +82,11 @@ h6 {
   margin-inline: auto;
 }
 
+.arrow {
+  display: grid;
+  place-content: center;
+}
+
 /* ==========================================================================
    HEADER · barra fija + logo
    ========================================================================== */
@@ -264,27 +269,53 @@ h6 {
   font-size: 2.5rem;
 }
 
-/* --- Media (contiene el componente ImageHover) --- */
-.about-media {
+.image-container {
+  position: relative;
   width: 100%;
-  /* llena su columna */
+  max-width: 600px;
+  margin-inline: auto;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  border-radius: 12px;
+}
+.image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* Enfoca la parte inferior de la imagen para centrar la cara */
+  object-position: center 60%; /* También podés probar con "center 80%" */
+  border-radius: 12px;
 }
 
-/* ==========================================================================
-   CONTACTO
-   ========================================================================== */
+
+
 
 /* ==========================================================================
    FORMULARIO DE CONTACTO
    ========================================================================== */
+.contact-section {
+  /* Fuerza a la sección a ocupar la pantalla completa */
+  min-height: calc(100vh - 80px);
+
+  /* Centra verticalmente el formulario y la flechita */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  /* Compensación exacta para el header fijo */
+  scroll-margin-top: 100px;
+  padding-bottom: 2rem;
+}
+
+/* Ajusta los márgenes del formulario para que no empujen demasiado hacia abajo */
 .contact-form {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
   width: 100%;
   max-width: 500px;
-  margin: 0 auto;
-  /* Centra el formulario */
+  margin: 0 auto 2.5rem;
   background-color: var(--bg-surface);
   padding: 2.5rem;
   border-radius: 12px;
@@ -337,31 +368,30 @@ h6 {
   /* El botón ocupa todo el ancho del formulario */
 }
 
-/* ==========================================================================
-   IMAGE HOVER · efecto de capas con parallax (ImageHover.jsx)
-   ========================================================================== */
-.image-container {
-  position: relative;
-  width: 100%;
-  max-width: 600px;
-  margin-inline: auto;
-  aspect-ratio: 1 / 1;
-  /* Cambialo si querés otra proporción */
-  cursor: pointer;
-  overflow: hidden;
-  border-radius: 12px;
-  border: 1px solid var(--border-color);
+.form-feedback {
+  padding: 0.825rem 1rem;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-family: var(--font-body);
+  text-align: center;
+  line-height: 1.4;
+  animation: popupAnim 0.3s ease forwards;
 }
 
-.image-layer {
-  position: absolute;
-  inset: 0;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  backface-visibility: hidden;
-  will-change: transform, opacity;
+/* Estado de éxito (Verde vibrante) */
+.feedback-success {
+  background-color: rgba(47, 144, 45, 0.12);
+  border: 1px solid var(--color-primary);
+  color: var(--color-primary);
 }
+
+/* Estado de error (Rojo suave) */
+.feedback-error {
+  background-color: rgba(229, 83, 75, 0.12);
+  border: 1px solid #e5534b;
+  color: #e5534b;
+}
+
 
 /* ==========================================================================
    BOTONES
@@ -389,6 +419,15 @@ h6 {
   background-color: var(--color-primary);
   color: var(--bg-main);
   /* Texto oscuro para alto contraste */
+}
+
+.btn-primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  background-color: var(--border-color);
+  color: var(--text-muted);
+  border-color: transparent;
+  box-shadow: none;
 }
 
 .btn-primary:hover {
@@ -446,6 +485,45 @@ h6 {
   /* Se expande al 100% */
 }
 
+
+.scroll-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 55px;
+  height: 55px;
+  margin: 3rem auto 0;
+  color: var(--color-primary);
+  border-radius: 50%;
+  font-size: 1.5rem;
+  font-weight: 300;
+  transition: all 0.3s ease;
+  cursor: default;
+  user-select: none;
+  animation: bounceArrow 2s infinite ease-in-out;
+}
+.secondary{
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-color);
+}
+
+
+
+
+/* Keyframes para el rebote suave */
+@keyframes bounceArrow {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(10px);
+    /* Baja 10px a la mitad de la animación */
+  }
+}
+
 /* ==========================================================================
    FOOTER
    ========================================================================== */
@@ -484,27 +562,58 @@ h6 {
 /* El contenedor principal */
 .portfolio-grid {
   display: grid;
-  /* Crea 12 columnas del mismo tamaño */
   grid-template-columns: repeat(12, 1fr);
   gap: 2rem;
   align-items: start;
-  /* Para que las tarjetas no se estiren verticalmente si son de distinto alto */
+
+  margin-top: 2.5rem;
 }
 
 /* Estilos base de la tarjeta */
 .card {
   width: 100%;
-  display: flex;
-  flex-direction: column;
 }
 
+/* El enlace envuelve la imagen y el título, lo hacemos contenedor flex */
+.card a {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  /* Separa la imagen del título de forma limpia */
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Le damos forma, borde y transición SOLO a la imagen */
 .card img {
   width: 100%;
   height: auto;
   object-fit: cover;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+  display: block;
 }
 
-/* --- CLASES DE VARIANTES (Replicando tu imagen) --- */
+/* Aseguramos que el título no tenga márgenes raros */
+.card h3 {
+  margin: 0;
+  transition: color 0.3s ease;
+}
+
+/* --- ANIMACIÓN HOVER --- */
+
+/* Al pasar el mouse por la tarjeta, SOLO la imagen se levanta y brilla */
+.card a:hover img {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.6), 0 0 20px rgba(47, 144, 45, 0.15);
+  border-color: rgba(47, 144, 45, 0.4);
+}
+
+/* Opcional: hace que el título se pinte de verde al hacer hover en el proyecto */
+.card a:hover h3 {
+  color: var(--color-primary);
+}
 
 /* Equivale a "Shadow Archive"[cite: 7]: Ocupa 4 columnas (más angosta) */
 .card-small {
@@ -526,15 +635,15 @@ h6 {
 
 .page-wrapper {
   /* Ajustá este valor según qué tan alto sea tu menú. 120px suele funcionar bien */
-  padding-top: 150px; 
+  padding-top: 150px;
   min-height: 100vh;
 }
 
 
 /* ==========================================================================
-   WIDGET FLOTANTE · DATO RANDOM 
+   WIDGET FLOTANTE · NASA (IMAGEN DEL DÍA)
    ========================================================================== */
-.fact-widget-container {
+.nasa-widget-container {
   position: fixed;
   bottom: 2rem;
   right: 2rem;
@@ -545,7 +654,7 @@ h6 {
 }
 
 /* --- Botón Flotante (Trigger) --- */
-.fact-trigger-btn {
+.nasa-trigger-btn {
   display: flex;
   align-items: center;
   gap: 0.6rem;
@@ -562,22 +671,25 @@ h6 {
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.fact-trigger-btn:hover {
+.nasa-trigger-btn:hover {
   border-color: var(--color-primary);
   color: var(--color-primary);
   box-shadow: 0 0 15px rgba(47, 144, 45, 0.3);
   transform: translateY(-2px);
 }
 
-.fact-icon {
+.nasa-icon {
   font-size: 1.1rem;
 }
 
-/* --- Bocadillo / Diálogo estilo Cómic --- */
-.fact-dialog {
+/* --- Diálogo estilo Cómic --- */
+.nasa-dialog {
   position: relative;
+  display: flex;
+  flex-direction: column;
   margin-bottom: 1.2rem;
-  width: min(320px, 85vw);
+  width: min(380px, 90vw);
+  max-height: min(75vh, 560px);
   background-color: var(--bg-surface);
   border: 1px solid var(--color-primary);
   border-radius: 12px;
@@ -587,7 +699,7 @@ h6 {
 }
 
 /* Triángulo apuntando hacia abajo (Pico de diálogo) */
-.fact-dialog::after {
+.nasa-dialog::after {
   content: "";
   position: absolute;
   bottom: -10px;
@@ -599,7 +711,9 @@ h6 {
   border-top: 10px solid var(--color-primary);
 }
 
-.fact-dialog-header {
+.nasa-dialog-header {
+  flex-shrink: 0;
+  /* el header queda fijo mientras el cuerpo scrollea */
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -608,14 +722,14 @@ h6 {
   padding-bottom: 0.5rem;
 }
 
-.fact-dialog-title {
+.nasa-dialog-title {
   font-family: var(--font-heading);
   font-size: 0.85rem;
   color: var(--color-primary);
   font-weight: 600;
 }
 
-.fact-close-btn {
+.nasa-close-btn {
   background: none;
   border: none;
   color: var(--text-muted);
@@ -625,49 +739,140 @@ h6 {
   transition: color 0.2s ease;
 }
 
-.fact-close-btn:hover {
+.nasa-close-btn:hover {
   color: var(--text-main);
 }
 
-.fact-dialog-body {
+/* --- Cuerpo con scroll --- */
+.nasa-dialog-body {
+  flex: 1;
+  min-height: 50px;
+  /* sin esto flex no deja scrollear */
+  overflow-y: auto;
+  padding-right: 0.5rem;
   font-size: 0.9rem;
   color: var(--text-main);
   line-height: 1.5;
-  margin-bottom: 1rem;
-  min-height: 50px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-primary) transparent;
 }
 
-.fact-loading {
+.nasa-dialog-body::-webkit-scrollbar {
+  width: 6px;
+}
+
+.nasa-dialog-body::-webkit-scrollbar-thumb {
+  background-color: var(--color-primary);
+  border-radius: 3px;
+}
+
+.nasa-loading {
   color: var(--text-muted);
   font-style: italic;
 }
 
-.fact-dialog-footer {
-  display: flex;
-  justify-content: flex-end;
+.nasa-error {
+  color: #e5534b;
 }
 
-.btn-fact-action {
-  background-color: var(--color-accent);
+/* --- Resultado de la NASA --- */
+.nasa-title {
+  font-family: var(--font-heading);
+  font-size: 1rem;
   color: var(--text-main);
+  margin: 0 0 0.8rem;
+}
+
+.nasa-media {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 0.8rem;
+}
+
+.nasa-video-link {
+  display: inline-block;
+  margin-bottom: 0.8rem;
+  font-size: 0.8rem;
+  color: var(--color-primary);
+  text-decoration: underline;
+}
+
+.nasa-description {
+  margin: 0;
+  color: var(--text-muted);
+}
+
+/* ==========================================================================
+   MAPA · UBICACIÓN
+   ========================================================================== */
+.map-container {
+  width: 100%;
+  height: clamp(320px, 60vh, 560px);
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(47, 144, 45, 0.1);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  margin-top: 6rem;
+  margin-bottom: 2rem;
+}
+
+.map-container:hover {
+  border-color: var(--color-primary);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 20px rgba(47, 144, 45, 0.25);
+}
+
+.map-canvas {
+  width: 100%;
+  height: 100%;
+}
+
+/* --- InfoWindow  */
+.gm-style .gm-style-iw-c {
+  background-color: var(--bg-surface) !important;
   border: 1px solid var(--color-primary);
-  padding: 0.4rem 0.8rem;
-  border-radius: 6px;
+  border-radius: 10px !important;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6) !important;
+  padding: 0.8rem 1rem !important;
+}
+
+.gm-style .gm-style-iw-d {
+  overflow: hidden !important;
+}
+
+
+.gm-style .gm-style-iw-tc::after {
+  background: var(--bg-surface) !important;
+}
+
+
+.gm-style .gm-ui-hover-effect {
+  top: 2px !important;
+  right: 2px !important;
+}
+
+.gm-style .gm-ui-hover-effect>span {
+  background-color: var(--text-muted) !important;
+}
+
+.gm-style .gm-ui-hover-effect:hover>span {
+  background-color: var(--text-main) !important;
+}
+
+
+.map-info {
+  padding-right: 1rem;
+}
+
+.map-info-text {
+  margin: 0;
   font-family: var(--font-body);
-  font-size: 0.75rem;
+  font-size: 0.9rem;
   font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.btn-fact-action:hover:not(:disabled) {
-  background-color: var(--color-primary);
-  color: var(--bg-main);
-}
-
-.btn-fact-action:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
+  color: var(--color-primary);
 }
 
 /* Animación de entrada */
@@ -676,6 +881,7 @@ h6 {
     opacity: 0;
     transform: translateY(10px) scale(0.95);
   }
+
   to {
     opacity: 1;
     transform: translateY(0) scale(1);
@@ -690,7 +896,8 @@ h6 {
   }
 
   .fact-text {
-    display: none; /* Muestra solo el ícono en móviles */
+    display: none;
+    /* Muestra solo el ícono en móviles */
   }
 
   .fact-trigger-btn {
@@ -698,6 +905,46 @@ h6 {
     border-radius: 50%;
   }
 }
+
+/* ==========================================================================
+   PÁGINA 404
+   ========================================================================== */
+.error-404-section {
+  min-height: calc(100vh - 150px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-block: 4rem;
+  text-align: center;
+}
+
+.error-404-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 600px;
+}
+
+.error-code {
+  font-family: var(--font-heading);
+  font-size: clamp(6rem, 14vw, 10rem);
+  font-weight: 600;
+  line-height: 1;
+  color: var(--color-primary);
+  text-shadow: 0 0 35px rgba(47, 144, 45, 0.35);
+  margin-bottom: 1rem;
+  user-select: none;
+}
+
+.error-description {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--text-muted);
+  margin-bottom: 2.5rem;
+  max-width: 460px;
+}
+
 /* ==========================================================================
    RESPONSIVE
    ========================================================================== */

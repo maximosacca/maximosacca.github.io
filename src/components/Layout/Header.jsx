@@ -27,7 +27,7 @@ export default function Header() {
         <nav className="main-nav">
           <ul>
             <li>
-              <NavLink to="/contacto">HABLEMOS</NavLink>
+              <NavLink to="/contacto#contact">HABLEMOS</NavLink>
             </li>
             <li>
               <NavLink to="/proyectos">PROYECTOS</NavLink>
