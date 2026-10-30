@@ -27,7 +27,7 @@ export const getNasa = async () => {
     const [hoy] = await res.json();
 
     const texto = hoy.explanation
-        .replace(/<[^>]*>/g, "")                // saca las etiquetas HTML
+        .replace(/<[^>]*>/g, "")
     return {
         title: hoy.title,
         media_type: hoy.media_type,
