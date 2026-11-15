@@ -268,14 +268,21 @@ h6 {
   font-size: 2.5rem;
 }
 
+/* --- Media (contiene el componente ImageHover) --- */
+.about-media {
+  width: 100%;
+}
+
 .image-container {
   position: relative;
   width: 100%;
   max-width: 600px;
   margin-inline: auto;
   aspect-ratio: 1 / 1;
+  cursor: pointer;
   overflow: hidden;
   border-radius: 12px;
+  border: 1px solid var(--border-color);
 }
 .image-container img {
   width: 100%;
@@ -283,6 +290,16 @@ h6 {
   object-fit: cover;
   object-position: center 60%; 
   border-radius: 12px;
+}
+
+.image-layer {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  backface-visibility: hidden;
+  will-change: transform, opacity;
 }
 
 
@@ -619,9 +636,9 @@ h6 {
 
 
 /* ==========================================================================
-   WIDGET FLOTANTE · NASA (IMAGEN DEL DÍA)
+   WIDGET FLOTANTE · DATO RANDOM
    ========================================================================== */
-.nasa-widget-container {
+.fact-widget-container {
   position: fixed;
   bottom: 2rem;
   right: 2rem;
@@ -632,7 +649,7 @@ h6 {
 }
 
 /* --- Botón Flotante (Trigger) --- */
-.nasa-trigger-btn {
+.fact-trigger-btn {
   display: flex;
   align-items: center;
   gap: 0.6rem;
@@ -649,25 +666,22 @@ h6 {
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.nasa-trigger-btn:hover {
+.fact-trigger-btn:hover {
   border-color: var(--color-primary);
   color: var(--color-primary);
   box-shadow: 0 0 15px rgba(47, 144, 45, 0.3);
   transform: translateY(-2px);
 }
 
-.nasa-icon {
+.fact-icon {
   font-size: 1.1rem;
 }
 
-/* --- Diálogo estilo Cómic --- */
-.nasa-dialog {
+/* --- Bocadillo / Diálogo estilo Cómic --- */
+.fact-dialog {
   position: relative;
-  display: flex;
-  flex-direction: column;
   margin-bottom: 1.2rem;
-  width: min(380px, 90vw);
-  max-height: min(75vh, 560px);
+  width: min(320px, 85vw);
   background-color: var(--bg-surface);
   border: 1px solid var(--color-primary);
   border-radius: 12px;
@@ -677,7 +691,7 @@ h6 {
 }
 
 /* Triángulo apuntando hacia abajo (Pico de diálogo) */
-.nasa-dialog::after {
+.fact-dialog::after {
   content: "";
   position: absolute;
   bottom: -10px;
@@ -689,8 +703,7 @@ h6 {
   border-top: 10px solid var(--color-primary);
 }
 
-.nasa-dialog-header {
-  flex-shrink: 0;
+.fact-dialog-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -699,14 +712,14 @@ h6 {
   padding-bottom: 0.5rem;
 }
 
-.nasa-dialog-title {
+.fact-dialog-title {
   font-family: var(--font-heading);
   font-size: 0.85rem;
   color: var(--color-primary);
   font-weight: 600;
 }
 
-.nasa-close-btn {
+.fact-close-btn {
   background: none;
   border: none;
   color: var(--text-muted);
@@ -716,68 +729,53 @@ h6 {
   transition: color 0.2s ease;
 }
 
-.nasa-close-btn:hover {
+.fact-close-btn:hover {
   color: var(--text-main);
 }
 
-/* --- Cuerpo con scroll --- */
-.nasa-dialog-body {
-  flex: 1;
-  min-height: 50px;
-  overflow-y: auto;
-  padding-right: 0.5rem;
+.fact-dialog-body {
   font-size: 0.9rem;
   color: var(--text-main);
   line-height: 1.5;
-  scrollbar-width: thin;
-  scrollbar-color: var(--color-primary) transparent;
+  margin-bottom: 1rem;
+  min-height: 50px;
 }
 
-.nasa-dialog-body::-webkit-scrollbar {
-  width: 6px;
-}
-
-.nasa-dialog-body::-webkit-scrollbar-thumb {
-  background-color: var(--color-primary);
-  border-radius: 3px;
-}
-
-.nasa-loading {
+.fact-loading {
   color: var(--text-muted);
   font-style: italic;
 }
 
-.nasa-error {
+.fact-error {
   color: #e5534b;
 }
 
-/* --- Resultado de la NASA --- */
-.nasa-title {
-  font-family: var(--font-heading);
-  font-size: 1rem;
+.fact-dialog-footer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.btn-fact-action {
+  background-color: var(--color-accent);
   color: var(--text-main);
-  margin: 0 0 0.8rem;
+  border: 1px solid var(--color-primary);
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
 
-.nasa-media {
-  display: block;
-  width: 100%;
-  height: auto;
-  border-radius: 8px;
-  margin-bottom: 0.8rem;
+.btn-fact-action:hover:not(:disabled) {
+  background-color: var(--color-primary);
+  color: var(--bg-main);
 }
 
-.nasa-video-link {
-  display: inline-block;
-  margin-bottom: 0.8rem;
-  font-size: 0.8rem;
-  color: var(--color-primary);
-  text-decoration: underline;
-}
-
-.nasa-description {
-  margin: 0;
-  color: var(--text-muted);
+.btn-fact-action:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 /* ==========================================================================

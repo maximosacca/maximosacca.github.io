@@ -4,7 +4,6 @@ import Contacto from './pages/Contacto.jsx'
 import Proyectos from './pages/Proyectos.jsx'
 import ScrollToAnchor from './components/Utils/ScrollToAnchor.jsx'
 import { Routes, Route } from 'react-router';
-import NasaButton from './components/Layout/NasaButton.jsx'
 import Layout from './components/Layout/Layout.jsx'
 import NotFound from './pages/NotFound.jsx'
 

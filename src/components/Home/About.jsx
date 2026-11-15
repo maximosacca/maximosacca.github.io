@@ -1,4 +1,5 @@
 import { NavLink } from "react-router";
+import ImageHover from "./ImageHover";
 
 export default function About() {
   return (
@@ -17,8 +18,8 @@ export default function About() {
           </NavLink>
         </div>
 
-        <div className="image-container">
-          <img src="/images/perfil.png" alt="Foto de Máximo" />
+        <div className="about-media">
+          <ImageHover src="/images/perfil.png" alt="Foto de Máximo" />
         </div>
       </div>
     </section>
