@@ -1,11 +1,10 @@
-import React from 'react';
 import { Link } from 'react-router';
 
 export default function NotFound() {
     return (
-        <section className="error-404-section">
+        <main className="error-404-section">
             <div className="container error-404-container">
-                <span className="error-code">404</span>
+                <h1 className="error-code">404</h1>
                 <p className="error-description">
                     La página que estás buscando no existe, fue movida o se encuentra fuera de servicio.
                 </p>
@@ -13,6 +12,6 @@ export default function NotFound() {
                     Volver al Inicio
                 </Link>
             </div>
-        </section>
+        </main>
     )
 }

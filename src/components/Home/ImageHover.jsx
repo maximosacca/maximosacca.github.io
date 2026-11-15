@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
+import usePrefersReducedMotion from "../Utils/usePrefersReducedMotion";
 
 const LAYERS = 10;
 const DURATION = 0.8;
@@ -17,6 +18,7 @@ const getFilter = (i) => {
 
 export default function ImageHover({ src, alt = "" }) {
   const containerRef = useRef(null);
+  const shouldReduceMotion = usePrefersReducedMotion();
 
   useEffect(() => {
     const container = containerRef.current;
@@ -32,6 +34,8 @@ export default function ImageHover({ src, alt = "" }) {
         scale: (i) => (i === 0 ? 1 : 0.95),
         opacity: (i) => (i === 0 ? 1 : 0),
       });
+
+      if (shouldReduceMotion) return;
 
       // al hacer hover, las capas aparecen una tras otra, cada una más chica
       const timeline = gsap.timeline({ paused: true }).to([...layers].reverse(), {
@@ -86,7 +90,7 @@ export default function ImageHover({ src, alt = "" }) {
     }, container);
 
     return () => ctx.revert();
-  }, [src]);
+  }, [src, shouldReduceMotion]);
 
   return (
     <div

@@ -8,9 +8,9 @@ export default function Layout() {
         <>
             <Header />
             <FactsButton />
-            <main>
+            <div>
                 <Outlet />
-            </main>
+            </div>
             <Footer />
         </>
     )

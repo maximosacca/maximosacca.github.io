@@ -3,6 +3,7 @@ import Home from './pages/Home.jsx'
 import Contacto from './pages/Contacto.jsx'
 import Proyectos from './pages/Proyectos.jsx'
 import ScrollToAnchor from './components/Utils/ScrollToAnchor.jsx'
+import DocumentTitle from './components/Utils/DocumentTitle.jsx'
 import { Routes, Route } from 'react-router';
 import Layout from './components/Layout/Layout.jsx'
 import NotFound from './pages/NotFound.jsx'
@@ -11,6 +12,7 @@ import NotFound from './pages/NotFound.jsx'
 function App() {
   return (
     <>
+      <DocumentTitle />
       <ScrollToAnchor />
       <Routes>
 

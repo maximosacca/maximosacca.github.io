@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import emailjs from '@emailjs/browser';
 import Arrow from '../Layout/Arrow';
 
@@ -10,6 +10,8 @@ export default function Formulario() {
 
   const sendEmail = (e) => {
     e.preventDefault();
+
+    if (enviando) return;
 
     setEnviando(true);
     setFeedback({ tipo: '', mensaje: '' });
@@ -24,7 +26,7 @@ export default function Formulario() {
             tipo: 'exito',
             mensaje: '¡Mensaje enviado con éxito! Me pondré en contacto con vos en breve',
           });
-          e.target.reset();
+          form.current?.reset();
         },
         (error) => {
           setEnviando(false);
@@ -32,34 +34,64 @@ export default function Formulario() {
             tipo: 'error',
             mensaje: 'Ocurrió un error al enviar el mensaje. Por favor, intenta de nuevo.',
           });
-          console.log('FAILED...', error.text);
+          console.error('Error al enviar el formulario:', error);
         },
       );
   };
 
   return (
     <section className='contact-section' id='contact'>
-      <form ref={form} onSubmit={sendEmail} className="contact-form">
+      <form
+        ref={form}
+        onSubmit={sendEmail}
+        className="contact-form"
+        aria-describedby={feedback.mensaje ? 'contacto-feedback' : undefined}
+      >
         <div className="form-group">
-          <label className="form-label">Nombre</label>
-          <input type="text" name="user_name" className="form-input" required />
+          <label className="form-label" htmlFor="contacto-nombre">Nombre</label>
+          <input
+            id="contacto-nombre"
+            type="text"
+            name="user_name"
+            className="form-input"
+            autoComplete="name"
+            required
+          />
         </div>
 
         <div className="form-group">
-          <label className="form-label">Email</label>
-          <input type="email" name="user_email" className="form-input" required />
+          <label className="form-label" htmlFor="contacto-email">Email</label>
+          <input
+            id="contacto-email"
+            type="email"
+            name="user_email"
+            className="form-input"
+            autoComplete="email"
+            required
+          />
         </div>
 
         <div className="form-group">
-          <label className="form-label">Mensaje</label>
-          <textarea name="message" className="form-input form-textarea" required />
+          <label className="form-label" htmlFor="contacto-mensaje">Mensaje</label>
+          <textarea
+            id="contacto-mensaje"
+            name="message"
+            className="form-input form-textarea"
+            autoComplete="off"
+            required
+          />
         </div>
 
         <button type="submit" className="btn btn-primary form-submit" disabled={enviando}>
           {enviando ? 'Enviando...' : 'Enviar Mensaje'}
         </button>
         {feedback.mensaje && (
-          <div className={`form-feedback ${feedback.tipo === 'exito' ? 'feedback-success' : 'feedback-error'}`}>
+          <div
+            id="contacto-feedback"
+            className={`form-feedback ${feedback.tipo === 'exito' ? 'feedback-success' : 'feedback-error'}`}
+            role={feedback.tipo === 'error' ? 'alert' : 'status'}
+            aria-live="polite"
+          >
             {feedback.mensaje}
           </div>
         )}
