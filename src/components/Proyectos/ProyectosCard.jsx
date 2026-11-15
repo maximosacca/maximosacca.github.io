@@ -4,7 +4,7 @@ export default function ProyectosCard({ nombre, img, variante, github, deploy })
   return (
     <article className={`card card-${variante}`}>
       <a href={linkDestino} target="_blank" rel="noreferrer">
-        <img src={img} alt={nombre} />
+        <img src={img} alt={nombre} loading="lazy" decoding="async" />
         <h3>{nombre}</h3>
       </a>
     </article>

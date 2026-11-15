@@ -19,7 +19,7 @@ export default function About() {
         </div>
 
         <div className="about-media">
-          <ImageHover src="/images/perfil.png" alt="Foto de Máximo" />
+          <ImageHover src="/images/perfil.webp" alt="Foto de Máximo" />
         </div>
       </div>
     </section>
